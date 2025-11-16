@@ -9,7 +9,7 @@ int main(){
     printf("3.Giai pt bac hai\n");
     printf("4.Tinh tien dien\n");
     printf("0.Thoat\n");
-    int luachon;
+    int luachon;//Bai 5:Menu
     scanf("%d",&luachon);
     switch (luachon){ //lựa chọn menu
         case 1:{// Bài 1: XÂY DỰNG CHƯƠNG TRÌNH TÍNH HỌC LỰC
@@ -99,6 +99,12 @@ int main(){
             printf("Ban da chon tinh tien dien\n");
             int sodien;
             float tiendien=0;
+            float bac1= 1.678;
+            float bac2= 1.734;
+            float bac3= 2.014;
+            float bac4= 2.536;
+            float bac5= 2.834;
+            float bac6= 2.927;
             printf("Nhap so dien nha ban da su dung:");
             scanf("%d",&sodien);
             if(sodien<0){
@@ -106,17 +112,17 @@ int main(){
                 return 1;
             }
             if(sodien<=50){
-                tiendien=sodien * 1.678;
+                tiendien=sodien * bac1;
             }else if(sodien<=100){
-                tiendien=sodien * 1.734;
+                tiendien=(50 * bac1) + (sodien - 50) * bac2;
             }else if(sodien<=200){
-                tiendien=sodien * 2.014;
+                tiendien= (50 * bac1) + (50 * bac2) + (sodien - 100) * bac3;
             }else if(sodien<=300){
-                tiendien=sodien * 2.536;
+                tiendien=(50 * bac1) + (50 * bac2) + (100 * bac3) + (sodien - 200) * bac4;
             }else if(sodien<=400){
-                tiendien=sodien * 2.834;
+                tiendien= (50 * bac1) + (50 * bac2) + (100 * bac3) + (100 * bac4) + (sodien - 300) * bac5;
             }else{
-                tiendien=sodien * 2.927;
+                tiendien= (50 * bac1) + (50 * bac2) + (100 * bac3) + (100 * bac4) + (100 * bac5) + (sodien - 400) * bac6;
             }
             printf("So tien dien can dong: %.3f VND\n", tiendien);
             break;
@@ -130,4 +136,3 @@ int main(){
     }
     return 0;
 }
- 
