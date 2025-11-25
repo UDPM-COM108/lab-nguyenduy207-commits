@@ -44,5 +44,31 @@ int main(){
     }
     printf("\nGia tri lon nhat: %.2lf", max);
     printf("\nGia tri nho nhat: %.2lf\n", min);
+//Bài 3: Tạo tam giác ngôi sao
+    char h[3][4]; //3 hàng, 4 cột
+    for(int i=0;i<3;i++) {
+        for(int j = 0;j <4;j++){
+            h[i][j] =' ';
+        }
+    }
+    for(int i=0;i<3;i++){
+        int stars;
+        if(i==0)    
+            stars = 1;//hàng 0, 1 *
+        else if(i==1)   
+            stars = 2;//hàng 1, 2*
+        else    
+            stars = 4;//hàng 2, 4*
+        for (int j=0;j<stars;j++){
+            h[i][j] = '*';
+        }
+    }
+    printf("Tam giác sao:\n");
+    for (int i=0;i<3;i++){
+        for (int j=0;j<4;j++){
+            printf("%c", h[i][j]);
+        }
+    printf("\n");
+    } 
     return 0;
 }
