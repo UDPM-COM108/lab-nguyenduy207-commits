@@ -1,5 +1,6 @@
 //BÀI 1: TÍNH TRUNG BÌNH TỔNG CÁC SỐ CHIA HẾT CHO 3 TRONG MẢNG
 #include <stdio.h>
+#include <math.h>
 int main(){
     int n;
     printf("Nhap do dai mang A:");
@@ -32,10 +33,10 @@ int main(){
     int b[m];
     for(int j=0;j<m;j++){
         printf("Nhap mang b[%d]:",j);
-        scanf("%d\n",&b[j]);
+        scanf("%d",&b[j]);
     }
     for(int j=0;j<m;j++){
-        printf("Mang B:%d\n",j);
+        printf("%d",j);
     }
     double max=b[0],min=b[0];
     for (int j = 1; j < m; j++){
@@ -44,31 +45,29 @@ int main(){
     }
     printf("\nGia tri lon nhat: %.2lf", max);
     printf("\nGia tri nho nhat: %.2lf\n", min);
-//Bài 3: Tạo tam giác ngôi sao
-    char h[3][4]; //3 hàng, 4 cột
-    for(int i=0;i<3;i++) {
-        for(int j = 0;j <4;j++){
-            h[i][j] =' ';
+//Bài 3:Sắp xếp mảng theo thứ tự giảm dần
+    int p,temp;
+    printf("Nhap so phan tu:");
+    scanf("%d",&p);
+    int mang[p];
+    //nhap mang
+    for(int i=0;i<p;i++){
+        printf("Nhap mang a[%d]:",i);
+        scanf("%d",&mang[i]);
+    }
+    //xap xep mang
+    for(int i=0;i<p;i++){
+        for(int j=0;j<p;j++){
+            if(mang[i]<mang[j]){
+                temp=mang[i];
+                mang[i]=mang[j];
+                mang[j]=temp;
+            }
         }
     }
-    for(int i=0;i<3;i++){
-        int stars;
-        if(i==0)    
-            stars = 1;//hàng 0, 1 *
-        else if(i==1)   
-            stars = 2;//hàng 1, 2*
-        else    
-            stars = 4;//hàng 2, 4*
-        for (int j=0;j<stars;j++){
-            h[i][j] = '*';
+    printf("Mang sau khi sap xep:");
+        for(int i=0;i<p;i++){
+            printf("%d",mang[i]);
         }
-    }
-    printf("Tam giác sao:\n");
-    for (int i=0;i<3;i++){
-        for (int j=0;j<4;j++){
-            printf("%c", h[i][j]);
-        }
-    printf("\n");
-    } 
-    return 0;
+        return 0;
 }
