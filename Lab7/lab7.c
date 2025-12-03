@@ -23,8 +23,8 @@ int main(){
 
     printf("\nBAI 2: XAY DUNG CHUONG TRINH DANG NHAP BANG USERNAME AND PASSWORD\n");
     char username[50],password[50];
-    char usercorrect[50] = "admin123";
-    char passcorrect[50] = "1482007";
+    char usercorrect[50] = "admin";
+    char passcorrect[50] = "123456";
     
     printf("Nhap username:");
     scanf("%s",&username);
@@ -35,6 +35,30 @@ int main(){
         printf("Dang nhap thanh cong!\n");
     }else{
         printf("WRONG!!VUI LONG NHAP LAI!\n");
+    }
+    getchar();//Xóa '\n' còn lại trong bộ nhớ
+    //Bài 3: Cho chuỗi bất kì tìm kí tự xuất hiện nhiều hơn 2 lần trong chuỗi đã nhập.
+    printf("\nBAI 3: CHUOI BAT KI TIM KI TU XUAT HIEN NHIEU HON 2 LAN!\n");
+    char a[100];
+    printf("Nhap ki tu bat ki:");
+    fgets(a,sizeof(a),stdin);
+    int dem[256] = {0};
+    //dem so lan xuat hien cua ki tu
+    for (int i=0;a[i] != 0;i++){
+        if (a[i] != '\n'){
+            dem[(unsigned char)a[i]]++;
+        }
+    }
+    printf("\nCac ki tu xuat hien hon 2 lan:\n");
+    int tim =0;
+    for (int i=0;i<256;i++){
+        if(dem[i]>2){
+            printf("'%c' xuat hien %d lan\n",i,dem[i]);
+            tim =1;
+        }
+    }
+    if(!tim){
+        printf("Khong co ki tu nao xuat hien hon 2 lan!");
     }
     return 0;
 }
