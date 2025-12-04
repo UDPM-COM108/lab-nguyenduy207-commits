@@ -14,23 +14,23 @@ void tinhtoanphanso();
 
 void kiemtrasoN(){
     float x;
-    int nguyen,chinhphuong;
+    int nguyen=0,chinhphuong=0;
     printf("Moi ban nhap so bat ky:");
     scanf("%f",&x);
 //check so N
     if( (int)x == x){
         printf("La so nguyen!\n");
-        nguyen=1;
+        nguyen=1;// đánh dấu 1:có
     }else{
         printf("Khong phai la so nguyen!\n");
     }
 //check so NT
     if(nguyen &&  x > 1){
-        int lasoNT = 1;
-        int n =(int)x;
-        for(int i=2; i<= sqrt(n);i++){
+        int lasoNT = 1; // đánh dấu là số nguyên tố
+        int n = (int)x;
+        for(int i=2; i<= sqrt(n);i++){ //check nhanh
             if(n%i == 0){
-                lasoNT=0;
+                lasoNT=0;//khong phia so nt
             break;
             }
         }
@@ -50,12 +50,31 @@ void kiemtrasoN(){
     int can = (int)sqrt(n);
     if (can * can == n){
         printf("La so chinh phuong!\n");
-        chinhphuong =1;
+        chinhphuong =1;//đánh dấu
     }else{
         printf("Khong phai la so chinh phuong!\n");
     }
 }
+void timuocboichung(){
+    int x,y;
+    printf("Nhap x va y:");
+    scanf("%d %d",&x,&y);
+    int a = x ,b = y;
+    //Tim uoc chung lon nhat bang vong lap euclid
+    while (b!=0){
+        int tmp = a%b; //tmp : temporary variable 
+        a = b;
+        b = tmp;
+    }
+    int UCLN =a;
+    //Tim bcnn 
+    int BCNN = (x * y) / UCLN;
+    printf("Uoc chung lon nhat cua (x,y): %d\n", UCLN);
+    printf("Boi chung nho nhat cua (x,y): %d\n", BCNN);
+}
 int main(){
+    int luachon;
+    do{
     printf("\n===WELCOME TO THE ASSIGNMENT MENU BY DUY===\n");
     printf("\n1.CHUC NANG KIEM TRA SO NGUYEN.");
     printf("\n2.CHUC NANG TIM UOC CHUNG VA BOI CHUNG CUA HAI SO.");
@@ -68,7 +87,7 @@ int main(){
     printf("\n9.CHUONG TRINH GAME FPOLY-LOTT(2/15).");
     printf("\n10.CHUC NANG TINH TOAN PHAN SO.");
     printf("\n0.EXITS");
-    int luachon;
+
     printf("\nNHAP LUA CHON TU (0-10):");
     scanf("%d",&luachon);
     switch (luachon){
@@ -79,6 +98,7 @@ int main(){
         }
         case 2:{
             printf("\nBAN DA CHON CHUC NANG TIM UOC CHUNG VA BOI CHUNG CUA HAI SO.\n");
+            timuocboichung();
             break;
         }
         case 3:{
@@ -119,5 +139,8 @@ int main(){
         default:
             printf("BAN DA NHAP SAI VUI LONG NHAP LAI (0-10)");
             break;
+        }
     }
+    while (luachon !=0);
+    return 0;
 }
