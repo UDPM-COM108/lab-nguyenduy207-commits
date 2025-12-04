@@ -72,6 +72,35 @@ void timuocboichung(){
     printf("Uoc chung lon nhat cua (x,y): %d\n", UCLN);
     printf("Boi chung nho nhat cua (x,y): %d\n", BCNN);
 }
+void tinhtienKaraoke(){
+    int start, end;
+    printf("Nhap gio bat dau: ");
+    scanf("%d", &start);
+    printf("Nhap gio ket thuc: ");
+    scanf("%d", &end);
+
+    if(start <12 || end >23){
+        printf("QUAN MO CUA VAO 12H-23H!! HEN GAP LAI BAN VAO 12H\n");
+        return ;
+    }
+    else if (start >= end){
+        printf("Thoi gian nhap khong hop le!!\n");
+        return ;
+    }
+    int sogio = end - start;
+    float tien=0;
+    
+    if(sogio <= 3){
+        tien = sogio * 150000; //3h dau 
+    }else{
+        tien = 3 * 150000 + (sogio - 3) * 150000 * 0.7; //4h tro len giam 30%
+    }
+    //14-17 giam 10%
+    if(start >= 14 && start <= 17){
+        tien *= 0.9 ;
+    }
+    printf("SO TIEN BAN CAN THANH TOAN CHO %d GIO LA: %.0f VND\n",sogio, tien);
+}
 int main(){
     int luachon;
     do{
@@ -103,6 +132,7 @@ int main(){
         }
         case 3:{
             printf("\nBAN DA CHON CHUC NANG TINH TIEN CHO QUAN KARAOKE.\n");
+            tinhtienKaraoke();
             break;
         }
         case 4:{
