@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+
 void kiemtrasoN();
 void timuocboichung();
 void tinhtienKaraoke();
@@ -101,6 +102,31 @@ void tinhtienKaraoke(){
     }
     printf("SO TIEN BAN CAN THANH TOAN CHO %d GIO LA: %.0f VND\n",sogio, tien);
 }
+void tinhtienDien(){
+    double kwh,tiendien=0;
+    do{ 
+        printf("Nhap so dien nha ban da su dung:");
+        scanf("%lf",&kwh);
+            if(kwh<=0){
+            printf("\nSo dien khong hop le! Vui long nhap tu 0 tro len.\n");
+        }
+    }while (kwh<=0);
+    float bac1=1.678, bac2=1.734, bac3=2.014, bac4=2.536, bac5=2.834, bac6=2.927;
+    if(kwh<=50){
+        tiendien= kwh * bac1;
+    }else if(kwh<=100){
+        tiendien= (50 * bac1) + (kwh - 50)*bac2;
+    }else if(kwh<=200){
+        tiendien= (50 * bac1) + (50 * bac2) + (kwh - 100)*bac3;
+    }else if(kwh<=300){
+        tiendien= (50 * bac1) + (50 * bac2) + (100 * bac3) + (kwh - 200)*bac4;
+    }else if(kwh<=400){
+        tiendien= (50 * bac1) + (50 * bac2) + (100 * bac3) + (200 * bac4) + (kwh - 300)*bac5;
+    }else{
+        tiendien= (50 * bac1) + (50 * bac2) + (100 * bac3) + (200 * bac4) + (300 * bac5) + (kwh - 400)*bac6;
+    }
+    printf("BAN DA SU DUNG %.2lf KWH DIEN, BAN CAN THANH TOAN %.3lf VND!\n",kwh,tiendien);
+}
 int main(){
     int luachon;
     do{
@@ -137,6 +163,7 @@ int main(){
         }
         case 4:{
             printf("\nBAN DA CHON CHUC NANG TINH TIEN DIEN.\n");
+            tinhtienDien();
             break;
         }
         case 5:{
