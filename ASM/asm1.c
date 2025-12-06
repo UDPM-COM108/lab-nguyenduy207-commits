@@ -127,6 +127,41 @@ void tinhtienDien(){
     }
     printf("BAN DA SU DUNG %.2lf KWH DIEN, BAN CAN THANH TOAN %.3lf VND!\n",kwh,tiendien);
 }
+void doiTien(){
+    int money;
+    printf("Nhap so tien ban can doi:");
+    scanf("%d",&money);
+    int menhgia[] = {500,200,100,50,20,10,5,2,1};
+    int size = sizeof(menhgia) / sizeof(menhgia[0]);//sizeof tu dong dem length
+    printf("Cac menh gia da doi ra: \n");
+    for(int i=0;i<size;i++){
+        int soto = money / menhgia[i];
+        if(soto > 0){
+            printf("%d to %d\n",soto, menhgia[i]);
+            money %= menhgia[i];//trừ phần đã đổi 
+        }
+    }
+}
+void tinhlaisuatVay(){
+    long vay;
+    printf("Nhap so tien muon vay:");
+    scanf("%ld",&vay);
+    long  gocphaitra = vay / 12;
+    long tienconlai = vay;
+    printf("\n%-2s | %-15s | %-15s | %-20s | %-18s\n", //%- can phai
+           "Ky han", "Lai phai tra", "Goc phai tra", 
+           "So tien phai tra", "So tien con lai");
+    printf("-------------------------------------------------------------------------------\n");
+    for (int i=1;i<=12;i++){
+        long laiphaitra = tienconlai * 0.05;
+        long tongphaitra = laiphaitra + gocphaitra;
+        printf("%-2d | %10ld | %10ld | %15ld | %13ld\n", 
+               i, laiphaitra, gocphaitra, tongphaitra, tienconlai);
+        tienconlai -=gocphaitra; //cap nhat moi ki
+    }
+}void vaytienmuaxe(){
+    
+}
 int main(){
     int luachon;
     do{
@@ -168,10 +203,12 @@ int main(){
         }
         case 5:{
             printf("\nBAN DA CHON CHUC NANG DOI TIEN.\n");
+            doiTien();
             break;
         }
         case 6:{
             printf("\nBAN DA CHON CHUC NANG TINH LAI SUAT VAY NGAN HANG VAY TRA GOP.\n");
+            tinhlaisuatVay();
             break;
         }
         case 7:{
