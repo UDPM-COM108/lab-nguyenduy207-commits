@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h> //thêm cho system() và system ("pause") và exit
 #include <math.h> 
+#include <string.h>
 void kiemtrasoN();
 void timuocboichung();
 void tinhtienKaraoke();
@@ -9,7 +10,7 @@ void doiTien();
 void tinhlaisuatVay();
 void vaytienmuaxe();
 void sapxepthongtin();
-void gameFPOlY();
+void gameFPOLY();
 void tinhtoanphanso();
 
 void kiemtrasoN(){
@@ -206,6 +207,39 @@ void tinhlaisuatVay(){
     printf("Tong lai phai tra: %.0lf VND\n",tonglai);
     printf("Tong tien phai tra: %.0lf VND\n",tongtientra);
     printf("Chenh lech so voi gia xe: %.0lf VND\n",tongtientra - giaxe);  
+}void sapxepthongtin(){
+    char hoten[100];
+    float diem;
+    while(getchar()!='\n');
+        printf("Nhap ho va ten:");
+        fgets(hoten,sizeof(hoten),stdin);
+        hoten[strcspn(hoten, "\n")] = '\0';  // Xóa \n
+    do{
+        printf("Nhap diem cua ban:");
+        scanf("%f",&diem);
+        if(diem <0 ||diem>10){
+            printf("NHAP SAI VUI LONG NHAP LAI (0-10)!");
+        }
+    }while(diem <0 ||diem>10);
+    char hocluc[20];
+    if(diem >=9 ){
+        strcpy(hocluc,"XUAT SAC."); // strcpy copy chuooix
+    }else if(diem >=8 ){
+        strcpy(hocluc,"GIOI.");
+    }else if(diem >=6.5){
+        strcpy(hocluc,"KHA.");
+    }else if(diem >=5){
+        strcpy(hocluc,"TRUNG BINH.");
+    }else {
+        strcpy(hocluc,"YEU.");
+    }
+    printf("Ho va ten:%s\n",hoten);
+    printf("Diem:%.1f\n",diem);
+    printf("Hoc luc cua ban:%s\n",hocluc);
+}void gameFPOLY(){
+
+}void tinhtoanphanso(){
+
 }
 int main(){
     int luachon;
@@ -229,78 +263,51 @@ int main(){
         case 1:{
             printf("\n===BAN DA CHON CHUC NANG KIEM TRA SO NGUYEN.===\n");
             kiemtrasoN();
-            printf("\n\nNhan Enter de next...");
-            getchar();  // Đọc ký tự newline còn sót
-            getchar();  // Chờ nhấn Enter
             break;
         }
         case 2:{
             printf("\n===BAN DA CHON CHUC NANG TIM UOC CHUNG VA BOI CHUNG CUA HAI SO.===\n");
             timuocboichung();
-            printf("\n\nNhan Enter de next...");
-            getchar();
-            getchar();
             break;
         }
         case 3:{
             printf("\n===BAN DA CHON CHUC NANG TINH TIEN CHO QUAN KARAOKE.====\n");
             tinhtienKaraoke();
-            printf("\n\nNhan Enter de next...");
-            getchar();
-            getchar();
             break;
         }
         case 4:{
             printf("\n===BAN DA CHON CHUC NANG TINH TIEN DIEN.===\n");
             tinhtienDien();
-            printf("\n\nNhan Enter de next...");
-            getchar();
-            getchar();
             break;
         }
         case 5:{
             printf("\n===BAN DA CHON CHUC NANG DOI TIEN.===\n");
             doiTien();
-            printf("\n\nNhan Enter de next...");
-            getchar();
-            getchar();
             break;
         }
         case 6:{
             printf("\n===BAN DA CHON CHUC NANG TINH LAI SUAT VAY NGAN HANG VAY TRA GOP.===\n");
             tinhlaisuatVay();
-            printf("\n\nNhan Enter de next...");
-            getchar();
-            getchar();
             break;
         }
         case 7:{
             printf("\n===BAN DA CHON CHUC NANG VAY TIEN MUA XE.===\n");
             vaytienmuaxe();
-            printf("\n\nNhan Enter de next...");
-            getchar();
-            getchar();
             break;
         }
         case 8:{
             printf("\n===BAN DA CHON CHUC NANG SAP XEP THONG TIN SINH VIEN.===\n");
-            printf("\n\nNhan Enter de next...");
-            getchar();
-            getchar();
+            sapxepthongtin();
             break;
         }
         case 9:{
             printf("\n===BAN DA CHON CHUONG TRINH GAME FPOLY-LOTT(2/15).===\n");
-            printf("\n\nNhan Enter de next...");
-            getchar();
-            getchar();
+            gameFPOLY();
             break;
         }
         case 10:{
             printf("\n===BAN DA CHON CHUC NANG TINH TOAN PHAN SO.===\n");
-            printf("\n\nNhan Enter de next...");
-            getchar();
-            getchar();
+            tinhtoanphanso();
             break;
         }
         case 0:
