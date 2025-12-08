@@ -1,7 +1,6 @@
 #include <stdio.h>
-#include <stdlib.h>
-#include <math.h>
-
+#include <stdlib.h> //thêm cho system() và system ("pause") và exit
+#include <math.h> 
 void kiemtrasoN();
 void timuocboichung();
 void tinhtienKaraoke();
@@ -160,7 +159,53 @@ void tinhlaisuatVay(){
         tienconlai -=gocphaitra; //cap nhat moi ki
     }
 }void vaytienmuaxe(){
-    
+    //const giu cố định giá trị
+    long long giaxe;
+    int nam;
+    const double lainam = 0.072;
+    printf("Gia tri xe:");
+    scanf("%lld",&giaxe);
+    printf("Thoi han vay (nam):");
+    scanf("%d",&nam);
+    printf("Lai suat co dinh: %.1lf%%\n",lainam * 100);
+    //nhập phần trăm vay
+    int phantramvay;
+    do{
+        printf("Nhap phan tram ban muon vay (0-100):");
+        scanf("%d",&phantramvay);
+        if(phantramvay<0 || phantramvay >100){
+            printf("SO KHONG HOP LE!!VUI LONG NHAP LAI.");
+        }
+    }while(phantramvay<0 || phantramvay >100);
+    //tính toán
+    double tilevay = phantramvay / 100.0;
+    long long tienvay =giaxe * tilevay;
+    long long sotientratruoc = giaxe - tienvay;
+    //tính số tiền tháng và số tháng vay
+    double laithang =lainam / 12;
+    int sothang = nam * 12;
+    //tính số tiền trả hàng tháng theo ct
+    double tientrahangthang;
+    if(laithang > 0){
+        double heso = pow(1 + laithang,sothang);
+        tientrahangthang = tienvay * (laithang * heso) /(heso -1);
+    }else {
+        tientrahangthang = (double)tienvay / sothang;
+    }
+    //hiện thị kq
+    printf("\n=== KET QUA ===\n");
+    printf("1. So tien tra truoc: %lld VND\n", sotientratruoc);
+    printf("2. So tien vay: %lld VND\n", tienvay);
+    printf("3. So tien tra hang thang: %.0lf VND\n", tientrahangthang);
+    printf("4. Thoi ki vay :%d thang\n",sothang);
+    //tinh tong
+    double tongtragop = tientrahangthang * sothang;
+    double tonglai = tongtragop - tienvay;
+    double tongtientra = sotientratruoc + tongtragop;
+    printf("Tong so tien phai tra gop: %.0lf VND\n",tongtragop);
+    printf("Tong lai phai tra: %.0lf VND\n",tonglai);
+    printf("Tong tien phai tra: %.0lf VND\n",tongtientra);
+    printf("Chenh lech so voi gia xe: %.0lf VND\n",tongtientra - giaxe);  
 }
 int main(){
     int luachon;
@@ -182,49 +227,80 @@ int main(){
     scanf("%d",&luachon);
     switch (luachon){
         case 1:{
-            printf("\nBAN DA CHON CHUC NANG KIEM TRA SO NGUYEN.\n");
+            printf("\n===BAN DA CHON CHUC NANG KIEM TRA SO NGUYEN.===\n");
             kiemtrasoN();
+            printf("\n\nNhan Enter de next...");
+            getchar();  // Đọc ký tự newline còn sót
+            getchar();  // Chờ nhấn Enter
             break;
         }
         case 2:{
-            printf("\nBAN DA CHON CHUC NANG TIM UOC CHUNG VA BOI CHUNG CUA HAI SO.\n");
+            printf("\n===BAN DA CHON CHUC NANG TIM UOC CHUNG VA BOI CHUNG CUA HAI SO.===\n");
             timuocboichung();
+            printf("\n\nNhan Enter de next...");
+            getchar();
+            getchar();
             break;
         }
         case 3:{
-            printf("\nBAN DA CHON CHUC NANG TINH TIEN CHO QUAN KARAOKE.\n");
+            printf("\n===BAN DA CHON CHUC NANG TINH TIEN CHO QUAN KARAOKE.====\n");
             tinhtienKaraoke();
+            printf("\n\nNhan Enter de next...");
+            getchar();
+            getchar();
             break;
         }
         case 4:{
-            printf("\nBAN DA CHON CHUC NANG TINH TIEN DIEN.\n");
+            printf("\n===BAN DA CHON CHUC NANG TINH TIEN DIEN.===\n");
             tinhtienDien();
+            printf("\n\nNhan Enter de next...");
+            getchar();
+            getchar();
             break;
         }
         case 5:{
-            printf("\nBAN DA CHON CHUC NANG DOI TIEN.\n");
+            printf("\n===BAN DA CHON CHUC NANG DOI TIEN.===\n");
             doiTien();
+            printf("\n\nNhan Enter de next...");
+            getchar();
+            getchar();
             break;
         }
         case 6:{
-            printf("\nBAN DA CHON CHUC NANG TINH LAI SUAT VAY NGAN HANG VAY TRA GOP.\n");
+            printf("\n===BAN DA CHON CHUC NANG TINH LAI SUAT VAY NGAN HANG VAY TRA GOP.===\n");
             tinhlaisuatVay();
+            printf("\n\nNhan Enter de next...");
+            getchar();
+            getchar();
             break;
         }
         case 7:{
-            printf("\nBAN DA CHON CHUC NANG VAY TIEN MUA XE.\n");
+            printf("\n===BAN DA CHON CHUC NANG VAY TIEN MUA XE.===\n");
+            vaytienmuaxe();
+            printf("\n\nNhan Enter de next...");
+            getchar();
+            getchar();
             break;
         }
         case 8:{
-            printf("\nBAN DA CHON CHUC NANG SAP XEP THONG TIN SINH VIEN.\n");
+            printf("\n===BAN DA CHON CHUC NANG SAP XEP THONG TIN SINH VIEN.===\n");
+            printf("\n\nNhan Enter de next...");
+            getchar();
+            getchar();
             break;
         }
         case 9:{
-            printf("\nBAN DA CHON CHUONG TRINH GAME FPOLY-LOTT(2/15).\n");
+            printf("\n===BAN DA CHON CHUONG TRINH GAME FPOLY-LOTT(2/15).===\n");
+            printf("\n\nNhan Enter de next...");
+            getchar();
+            getchar();
             break;
         }
         case 10:{
-            printf("\nBAN DA CHON CHUC NANG TINH TOAN PHAN SO.\n");
+            printf("\n===BAN DA CHON CHUC NANG TINH TOAN PHAN SO.===\n");
+            printf("\n\nNhan Enter de next...");
+            getchar();
+            getchar();
             break;
         }
         case 0:
