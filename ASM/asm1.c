@@ -1,7 +1,8 @@
 #include <stdio.h>
-#include <stdlib.h> //thêm cho system() và system ("pause") và exit
+#include <stdlib.h> //thêm cho rand(),srand() và exit
 #include <math.h> 
 #include <string.h>
+#include <time.h>
 void kiemtrasoN();
 void timuocboichung();
 void tinhtienKaraoke();
@@ -70,8 +71,8 @@ void timuocboichung(){
     int UCLN =a;
     //Tim bcnn 
     int BCNN = (x * y) / UCLN;
-    printf("Uoc chung lon nhat cua (x,y): %d\n", UCLN);
-    printf("Boi chung nho nhat cua (x,y): %d\n", BCNN);
+    printf("Uoc chung lon nhat cua (%d,%d): %d\n",x,y, UCLN);
+    printf("Boi chung nho nhat cua (%d,%d): %d\n",x,y, BCNN);
 }
 void tinhtienKaraoke(){
     int start, end;
@@ -142,24 +143,30 @@ void doiTien(){
         }
     }
 }
-void tinhlaisuatVay(){
+void tinhlaisuatVay() {
     long vay;
-    printf("Nhap so tien muon vay:");
-    scanf("%ld",&vay);
-    long  gocphaitra = vay / 12;
+    printf("Nhap so tien muon vay: ");
+    scanf("%ld", &vay);
+
+    long gocphaitra = vay / 12;  
     long tienconlai = vay;
-    printf("\n%-2s | %-15s | %-15s | %-20s | %-18s\n", //%- can phai
-           "Ky han", "Lai phai tra", "Goc phai tra", 
-           "So tien phai tra", "So tien con lai");
-    printf("-------------------------------------------------------------------------------\n");
-    for (int i=1;i<=12;i++){
-        long laiphaitra = tienconlai * 0.05;
+
+    printf("\n%-5s | %-15s | %-15s | %-20s | %-18s\n",
+           "Ky", "Lai phai tra", "Goc phai tra", 
+           "Tong phai tra", "So tien con lai");
+    printf("--------------------------------------------------------------------------------------\n");
+    for (int i = 1; i <= 12; i++) {
+        double laiphaitra_double = tienconlai * 0.05;   
+        long laiphaitra = (long)laiphaitra_double;       // ép kiểu về long
+
         long tongphaitra = laiphaitra + gocphaitra;
-        printf("%-2d | %10ld | %10ld | %15ld | %13ld\n", 
+
+        printf("%-5d | %-15ld | %-15ld | %-20ld | %-18ld\n", 
                i, laiphaitra, gocphaitra, tongphaitra, tienconlai);
-        tienconlai -=gocphaitra; //cap nhat moi ki
+        tienconlai -= gocphaitra;  
     }
-}void vaytienmuaxe(){
+}
+void vaytienmuaxe(){
     //const giu cố định giá trị
     long long giaxe;
     int nam;
@@ -207,13 +214,10 @@ void tinhlaisuatVay(){
     printf("Tong lai phai tra: %.0lf VND\n",tonglai);
     printf("Tong tien phai tra: %.0lf VND\n",tongtientra);
     printf("Chenh lech so voi gia xe: %.0lf VND\n",tongtientra - giaxe);  
-}void sapxepthongtin(){
+}
+void sapxepthongtin(){
     char hoten[100];
     float diem;
-    while(getchar()!='\n');
-        printf("Nhap ho va ten:");
-        fgets(hoten,sizeof(hoten),stdin);
-        hoten[strcspn(hoten, "\n")] = '\0';  // Xóa \n
     do{
         printf("Nhap diem cua ban:");
         scanf("%f",&diem);
@@ -221,25 +225,99 @@ void tinhlaisuatVay(){
             printf("NHAP SAI VUI LONG NHAP LAI (0-10)!");
         }
     }while(diem <0 ||diem>10);
+    getchar();
+    printf("Nhap ho va ten:");
+    fgets(hoten,sizeof(hoten),stdin);
     char hocluc[20];
     if(diem >=9 ){
         strcpy(hocluc,"XUAT SAC."); // strcpy copy chuooix
     }else if(diem >=8 ){
         strcpy(hocluc,"GIOI.");
-    }else if(diem >=6.5){
+    }else if(diem >=7){
         strcpy(hocluc,"KHA.");
     }else if(diem >=5){
         strcpy(hocluc,"TRUNG BINH.");
     }else {
         strcpy(hocluc,"YEU.");
     }
-    printf("Ho va ten:%s\n",hoten);
-    printf("Diem:%.1f\n",diem);
-    printf("Hoc luc cua ban:%s\n",hocluc);
-}void gameFPOLY(){
-
-}void tinhtoanphanso(){
-
+    printf("Ho va ten:%s",hoten);
+    printf("\nDiem:%.1f",diem);
+    printf("\nHoc luc cua ban:%s\n",hocluc);
+}
+void gameFPOLY(){
+    int so1,so2;
+    printf("Nhap so thu nhat(01-15):");
+    scanf("%d",&so1);
+    printf("Nhap so thu hai(01-15):");
+    scanf("%d",&so2);
+    // ktra hop le
+    do{
+    if(so1 <1 || so1 >15 || so2 <1 || so2>15){
+        printf("Nhap so khong hop le! Vui long nhap lai so tu 01 den 15.\n");
+    }
+    }while(so1 <1 || so1 >15 || so2 <1 || so2>15);
+    //so random
+    srand(time(NULL));
+    int somay1 = rand()% 15 +1;//random tu 01-15
+    int somay2 = rand()% 15 +1;
+    //random 2 so khac nhau
+    while(somay2 == somay1){
+        somay2=rand()%15+1;
+    }
+    printf("\nKet qua FPOLY LOTT==\n");
+    printf("so may man: %02d va %02d\n",somay1,somay2);
+    printf("so cua ban: %02d va %02d\n",so1,so2);
+    int demtrung=0;
+    if(so1 == somay1 || so1 == somay2) 
+        demtrung++;
+    if(so2 == somay1 || so2 == somay2)
+        demtrung++;
+    printf("\n=Ket qua trung thuong=\n");
+    if(demtrung==0){
+        printf("Chuc ban may man lan sau.\n");
+    }else if(demtrung ==1){
+        printf("\nChuc mung ban dat GIAI NHI!\n");
+    }else if(demtrung ==2){
+        printf("\nChuc mung ban dat GIAI NHAT!\n");
+    }
+}
+void tinhtoanphanso(){
+    int tu1,mau1,tu2,mau2;
+    // Nhập phân số
+    printf("Nhap phan so A (tu/mau): ");
+    scanf("%d/%d", &tu1, &mau1);
+    while (mau1 == 0) {
+        printf("Mau so phai khac 0! Nhap lai: ");
+        scanf("%d/%d", &tu1, &mau1);
+    }
+    
+    printf("Nhap phan so B (tu/mau): ");
+    scanf("%d/%d", &tu2, &mau2);
+    while (mau2 == 0) {
+        printf("Mau so phai khac 0! Nhap lai: ");
+        scanf("%d/%d", &tu2, &mau2);
+    }
+    //tinh tong
+    int tongtu = tu1 * mau2 + tu2 * mau1;
+    int tongmau =mau1 * mau2;
+    //tinh hieu
+    int hieutu = tu1 * mau2 - tu2 * mau1;
+    int hieumau =mau1 * mau2;
+    //tinh tich
+    int tichtu = tu1 * tu2;
+    int tichmau = mau1 * mau2;
+    //tinh thuong
+    int thuongtu = tu1 * mau2;
+    int thuongmau = tu2 * mau1;
+    printf("\n===Ket qua===\n");
+    printf("Tong cua phan so: %d/%d = %.2f\n",tongtu,tongmau,(float)tongtu/tongmau);
+    printf("Hieu cua phan so: %d/%d = %.2f\n",hieutu,hieumau,(float)hieutu/hieumau);
+    printf("Tich cua phan so: %d/%d = %.2f\n",tichtu,tichmau,(float)tichtu/tichmau);
+    if(tu2==0){ 
+    printf("Khong the chia het cho 0!\n");
+    }else{
+        printf("Thuong cua phan so: %d/%d = %.2f\n",thuongtu,thuongmau,(float)thuongtu/thuongmau);
+    }
 }
 int main(){
     int luachon;
@@ -316,6 +394,11 @@ int main(){
         default:
             printf("BAN DA NHAP SAI VUI LONG NHAP LAI (0-10)");
             break;
+        }
+        if(luachon != 0){
+            printf("\nNhan Enter de tiep tuc...");
+            while(getchar() != '\n');
+            getchar();
         }
     }
     while (luachon !=0);
